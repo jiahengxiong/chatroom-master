@@ -1,0 +1,7 @@
+<div class="msg_item fn-clear">
+    <div class="uface"><img src="{{ message.author.avatar_url }} " width="40" height="40"  alt=""></div>
+    <div class="item_right">
+        <div class="msg">{{ message.content|safe }}</div>
+        <div class="name_time">{{ message.author.username }} · {{ message.create_time }}</div>
+    </div>
+</div>

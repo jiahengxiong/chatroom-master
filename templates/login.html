@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!--    下面是弹出框的样式-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/default.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/component.css') }}" />
+    <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+
+    <script>
+		// this is important for IEs
+		var polyfilter_scriptpath = '/js/';
+	</script>
+<!--    样式插入结束-->
+    <style type="text/css">
+		.middle {
+		    margin: 20%;
+			padding: 50px 50px 50px 50px;
+			background-color: white;
+			border-radius: 15px;
+			box-shadow: 10px 10px 5px rgb(0,0,0,0.1);
+		}
+	</style>
+	<script type="text/javascript"></script>
+    <title>Login</title>
+</head>
+<body>
+
+    <nav class="navbar pull-right navbar-expand-sm bg-light">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="register">
+                    <button>注册</button>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="middle border border-secondary w-50 mx-auto">
+            <div class="row align-items-center justify-content-center text-center">
+                <form method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    </div>
+                    <div class="form-group" >
+                        <input type="username" class="form-control" placeholder="请输入用户名" name="username" required>
+                    </div>
+                    <div class="form-group" >
+                        <input type="password" class="form-control" placeholder="请输入密码" name="password" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" name="submit">登陆</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <button class="md-trigger" id="submit"  data-modal="modal-10" style="display:none;"></button>
+    <script>
+      const btn = document.getElementById('submit');
+      setTimeout(function(){
+			simulateClick();
+		},0.1*1000)
+      btn.onclick = function () { //
+      };
+      simulateClick();
+      function simulateClick() { // 模拟 浏览器的鼠标点击事件
+        const event = new MouseEvent('click', {
+          view: window,
+          bubbles: true,
+          cancelable: true
+        });
+        btn.dispatchEvent(event);
+      }
+  </script>
+	<!-- 弹窗内容开始 -->
+
+    <div class="md-modal md-effect-10" id="modal-10">
+        <div class="md-content border border-secondary">
+            <div>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li style="list-style:none">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+                <button class="md-close">关闭</button>
+            </div>
+        </div>
+    </div>
+	<!-- 弹窗内容结束 -->
+		<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+		<script src="{{ url_for('static', filename='js/classie.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/modalEffects.js') }}"></script>
+
+		<!-- for the blur effect -->
+		<!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+		<script>
+			// this is important for IEs
+			var polyfilter_scriptpath = '/js/';
+		</script>
+		<script src="{{ url_for('static', filename='js/cssParser.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/css-filters-polyfill.js') }}"></script>
+</body>
+</html>
